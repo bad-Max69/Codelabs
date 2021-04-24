@@ -8,9 +8,23 @@ import android.view.View
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        val textViewForAct2 = findViewById<TextView>(R.id.act1_resText)
+        savedInstanceState?.let {
+            val visibleView = savedInstanceState.getBoolean("visible")
+            Log.e("save", "get save $visibleView")
+            if (visibleView) {
+                textViewForAct2.visibility = View.VISIBLE
+                textViewForAct2.text = savedInstanceState.getString("text")
+            }
+        }
+
     }
 
     fun launchSecondActivity(view: View) {
@@ -32,4 +46,16 @@ class MainActivity : AppCompatActivity() {
            textViewForAct2.visibility = View.VISIBLE
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        val textViewForAct2 = findViewById<TextView>(R.id.act1_resText)
+        outState.apply{
+            putBoolean("visible", true)
+            putString("text", textViewForAct2.text.toString())
+        }
+
+        super.onSaveInstanceState(outState)
+        Log.e("save", "save")
+    }
+
 }
