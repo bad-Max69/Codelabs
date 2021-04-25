@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
+import androidx.core.app.ShareCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,6 +58,16 @@ class MainActivity : AppCompatActivity() {
 
         super.onSaveInstanceState(outState)
         Log.e("save", "save")
+    }
+
+    fun sendIntent(view: View) {
+        val textForSendIntent = findViewById<EditText>(R.id.act1_editText)
+        ShareCompat.IntentBuilder
+                .from(this)
+                .setType("text/plain")
+                .setChooserTitle("Share")
+                .setText(textForSendIntent.text.toString())
+                .startChooser()
     }
 
 }
