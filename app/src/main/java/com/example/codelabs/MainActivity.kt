@@ -16,7 +16,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+// get another intent
+        val anotherIntent = intent.clipData?.getItemAt(0)?.text
+        val textViewFromIntent = findViewById<TextView>(R.id.textFromIntent)
+        textViewFromIntent.text = anotherIntent.toString()
+        Log.e("intent", "text $anotherIntent")
 
+// save state textView ab rotation
         val textViewForAct2 = findViewById<TextView>(R.id.act1_resText)
         savedInstanceState?.let {
             val visibleView = savedInstanceState.getBoolean("visible")
@@ -26,9 +32,9 @@ class MainActivity : AppCompatActivity() {
                 textViewForAct2.text = savedInstanceState.getString("text")
             }
         }
-
     }
 
+// launchSecondActivity
     fun launchSecondActivity(view: View) {
 
         val intent = Intent(this, MainActivity2::class.java)
@@ -60,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         Log.e("save", "save")
     }
 
+// отправка текста в другое приложение
     fun sendIntent(view: View) {
         val textForSendIntent = findViewById<EditText>(R.id.act1_editText)
         ShareCompat.IntentBuilder
@@ -69,5 +76,6 @@ class MainActivity : AppCompatActivity() {
                 .setText(textForSendIntent.text.toString())
                 .startChooser()
     }
+
 
 }

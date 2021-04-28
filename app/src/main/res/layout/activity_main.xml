@@ -53,4 +53,13 @@
         app:layout_constraintStart_toStartOf="parent"
         android:onClick="sendIntent"/>
 
+    <TextView
+       android:id="@+id/textFromIntent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="text from intent"
+        app:layout_constraintBottom_toTopOf="@id/button2"
+        app:layout_constraintStart_toStartOf="@id/button2"
+        app:layout_constraintEnd_toEndOf="@id/button2"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
